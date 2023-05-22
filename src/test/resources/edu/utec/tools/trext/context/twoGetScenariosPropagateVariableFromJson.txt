@@ -7,6 +7,7 @@ method post
 body
 ```
 {
+  "personId" : 501,
   "firstName": "John",
   "lastName" : "doe",
   "id" : 77777,
@@ -32,4 +33,15 @@ asserts
 assertThat ${res:status} isEqualTo 200
 assertThat $.message isNotNull
 assertThat $.message isEqualTo "created"
+context
+setVarFromJson "personId" $.personId 
+
+Scenario: Fetch netflix preferences
+url http://localhost:8080/v2/netflix/preferences?id=${personId}
+method get
+asserts
+assertThat ${res:status} isEqualTo 200
+assertThat $.series isEqualTo "The100"
+assertThat $.movies isEqualTo "TimeMachine"
+
 

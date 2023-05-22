@@ -5,7 +5,7 @@ Scenario: Fetch user
 url http://localhost:8080/user
 method get
 asserts
-assertThat ${status} isEqualTo 200
+assertThat ${res:status} isEqualTo 200
 assertThat $.personId isNotNull
 assertThat $.personId isEqualTo 77777
 context
@@ -39,7 +39,7 @@ body
 }
 ```
 asserts
-assertThat ${status} isEqualTo 200
+assertThat ${res:status} isEqualTo 200
 assertThat $.message isNotNull
 assertThat $.message isEqualTo "created"
 

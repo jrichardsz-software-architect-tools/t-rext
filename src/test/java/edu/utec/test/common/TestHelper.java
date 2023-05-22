@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -44,13 +46,18 @@ public class TestHelper {
     return file;
   }
 
-  public static String getTestFileAsString(Object testeInstance, String fileName) throws Exception {
+  public static String getTestFileAsString(Object testInstance, String fileName) throws Exception {
     String locationAsFilePath =
-        testeInstance.getClass().getPackage().getName().replaceAll("\\.", "/");
-    String testName = testeInstance.getClass().getSimpleName();
+        testInstance.getClass().getPackage().getName().replaceAll("\\.", "/");
+    String testName = testInstance.getClass().getSimpleName();
     String absoluteClasapathLocation =
         String.format("%s/%s.%s", locationAsFilePath, testName, fileName);
     return getFileAsString(absoluteClasapathLocation);
+  }
+  
+  public static List<String> convertMultiLineStringToList(String multilineString){
+    String[] rawLines = multilineString.split("\n");
+    return Arrays.asList(rawLines);
   }
 
   @SuppressWarnings("unchecked")

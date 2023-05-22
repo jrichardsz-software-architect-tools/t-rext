@@ -1,0 +1,6 @@
+context
+setVar "personId" $.personId
+setVar "personName" $.personName
+setVar "isGenius" $.isGenius
+setVar "isBadGamer" $.isBadGamer
+setVar "nickname" $.nickname

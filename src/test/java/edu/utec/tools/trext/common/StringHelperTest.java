@@ -67,5 +67,12 @@ public class StringHelperTest {
     assertEquals("1598885893000",
         StringHelper.convertGeniuneValueToStringRepresentationSafe(1598885893000l));
   }
+  
+  @Test
+  public void shouldGetKeyFromVariableSyntax() throws Exception {
+    assertEquals("foo",StringHelper.getKeyFromVariableSyntax("${foo}"));
+    assertEquals("foo:bar",StringHelper.getKeyFromVariableSyntax("${foo:bar}"));
+    assertEquals("foo.bar",StringHelper.getKeyFromVariableSyntax("${foo.bar}"));
+  }
 
 }

@@ -4,8 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.utec.tools.trext</groupId>
 	<artifactId>t-rext</artifactId>
-	<version>1.0.3</version>
-
+	<version>1.0.4</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<test.coverage.rate>100</test.coverage.rate>
@@ -13,7 +12,6 @@
 		<cobertura.skip>false</cobertura.skip>
 		<cobertura.skip>false</cobertura.skip>
 	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -78,7 +76,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -143,7 +140,15 @@
 			<version>9.4.31.v20200723</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+		</dependency>
 	</dependencies>
-
 </project>

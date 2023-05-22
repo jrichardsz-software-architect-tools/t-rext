@@ -58,7 +58,7 @@ public class TrextCmdEntrypoint {
           cmd.getOptionValue("report_directory_location"), cmd.getOptionValue("exclude_file_names"),
           cmd.hasOption("debug"));
     } else if (cmd.getOptionValue("mode").contentEquals("auto")) {
-      // IA mode will try to detect which mode is: single or multiple
+      // I will try to detect which mode is: single or multiple
       AutomaticModeHelper automaticModeHelper = new AutomaticModeHelper();
       HashMap<String, String> arguments =
           automaticModeHelper.analize(cmd.getOptionValue("directory"), cmd.getOptionValue("exclude_file_names"));

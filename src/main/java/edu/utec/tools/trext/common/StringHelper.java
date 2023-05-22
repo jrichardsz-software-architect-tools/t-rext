@@ -12,7 +12,7 @@ public class StringHelper {
   private static final Logger logger = LogManager.getLogger(StringHelper.class);
 
   public static Object evaluateJsonExpression(String expresion, String json) throws Exception {
-    logger.debug("jsonapth expression:" + expresion);
+    logger.debug("jsonpath expression: " + expresion);
 
     if (json == null || json.isEmpty()) {
       throw new Exception("Http body is null."
@@ -114,5 +114,10 @@ public class StringHelper {
       throw new Exception(
           String.format("value %s or its class %s is not supported", value, value.getClass()));
     }
+  }
+  
+  //TODO: validate the required syntax before extraction
+  public static String getKeyFromVariableSyntax(String rawString) {
+    return rawString.replaceFirst("\\$\\{", "").replace("}", "");
   }
 }

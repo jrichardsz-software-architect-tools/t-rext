@@ -1,1 +1,2 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import com.jayway.jsonpath.JsonPath;

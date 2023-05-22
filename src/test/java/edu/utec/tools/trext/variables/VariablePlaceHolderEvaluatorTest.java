@@ -93,4 +93,17 @@ public class VariablePlaceHolderEvaluatorTest {
     VariablePlaceHolderEvaluator evaluator = new VariablePlaceHolderEvaluator();
     assertEquals("A+B=C", evaluator.evaluteValueIfIsEnvironmentVariable("${ADDEND_1}+${ADDEND_2}=${SUM}"));    
   }
+  
+//  @Test
+//  public void replaceReqVariablesInString() throws Exception {
+//
+//    VariablePlaceHolderEvaluator evaluator = new VariablePlaceHolderEvaluator();
+//
+//    HashMap<String, Object> variables = new HashMap<String, Object>();
+//    variables.put("req:code", "201545457");
+//
+//    assertEquals("http://acme.com/201545457",
+//        evaluator.replaceVariablesAndJockersInString("http://acme.com/${req:code}", variables));
+//
+//  }
 }

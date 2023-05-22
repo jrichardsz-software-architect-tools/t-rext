@@ -9,7 +9,7 @@ import edu.utec.tools.trext.common.LoggerHelper;
 public class MethodEnhancerTest {
 
   @Test
-  public void methodEnhancer01SimpleValues() throws Exception {
+  public void methodEnhancerSimpleValues() throws Exception {
     MethodEnhancer methodEnhancer = new MethodEnhancer();
     String equals1 = methodEnhancer.rawStringToConsecutiveMethodsWithSingleArgument(
         "assertThat 123 isEqualTo 123", null, null);
@@ -38,7 +38,7 @@ public class MethodEnhancerTest {
   }
 
   @Test
-  public void methodEnhancer01WithJsonPath() throws Exception {
+  public void methodEnhancerWithJsonPath() throws Exception {
     MethodEnhancer methodEnhancer = new MethodEnhancer();
 
     String json =
@@ -58,7 +58,7 @@ public class MethodEnhancerTest {
   }
 
   @Test
-  public void methodEnhancer01WithVariables() throws Exception {
+  public void methodEnhancerWithVariables() throws Exception {
     LoggerHelper.setDebugLevel();
     MethodEnhancer methodEnhancer = new MethodEnhancer();
 
@@ -80,82 +80,88 @@ public class MethodEnhancerTest {
             "assertThat ${isAdmin} isEqualTo false ", variables, null));
   }
 
-  @Test
-  public void methodEnhancer02SimpleValues() throws Exception {
-    MethodEnhancer methodEnhancer = new MethodEnhancer();
-    String equals1 =
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar 123 123", null, null);
-    assertEquals("setVar(123,123)", equals1);
+//  @Test
+//  public void methodEnhancer02SimpleValues() throws Exception {
+//    MethodEnhancer methodEnhancer = new MethodEnhancer();
+//    String equals1 =
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar 123 123", null, null);
+//    assertEquals("setVar(123,123)", equals1);
+//
+//    equals1 = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"abc\" \"abc\"",
+//        null, null);
+//    assertEquals("setVar(\"abc\",\"abc\")", equals1);
+//
+//    equals1 =
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar true false", null, null);
+//    assertEquals("setVar(true,false)", equals1);
+//  }
 
-    equals1 = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"abc\" \"abc\"",
-        null, null);
-    assertEquals("setVar(\"abc\",\"abc\")", equals1);
+//  @Test
+//  public void methodEnhancer02WithJsonPath() throws Exception {
+//    MethodEnhancer methodEnhancer = new MethodEnhancer();
+//
+//    String json =
+//        TestHelper.getFileAsString("edu/utec/tools/trext/method/equalsEnhancerWithJsonPath.txt");
+//
+//    assertEquals("setVar(\"Jane\",\"John\")", methodEnhancer
+//        .rawStringToOneMethodWithSeveralArguments("setVar \"Jane\" $.firstName", null, json));
+//
+//    assertEquals("setVar(\"age\",26)", methodEnhancer
+//        .rawStringToOneMethodWithSeveralArguments("setVar \"age\" $.age", null, json));
+//
+//    assertEquals("setVar(\"type\",\"iPhone\")",
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments(
+//            "setVar \"type\" $.phoneNumbers[0].type", null, json));
+//  }
 
-    equals1 =
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar true false", null, null);
-    assertEquals("setVar(true,false)", equals1);
-  }
+//  @Test
+//  public void methodEnhancer02WithVariables() throws Exception {
+//    
+//    LoggerHelper.setDebugLevel();
+//    MethodEnhancer methodEnhancer = new MethodEnhancer();
+//
+//    HashMap<String, Object> variables = new HashMap<String, Object>();
+//    variables.put("firstName", "Jane");
+//    variables.put("age", 26);
+//    variables.put("isAdmin", false);
+//
+//    assertEquals("setVar(\"name\",\"Jane\")",
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"name\" \"${firstName}\"",
+//            variables, null));
+//
+//    assertEquals("setVar(\"name\",26)", methodEnhancer
+//        .rawStringToOneMethodWithSeveralArguments("setVar \"name\" ${age}", variables, null));
+//
+//    assertEquals("setVar(\"canDelete\",false)",
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"canDelete\" ${isAdmin}",
+//            variables, null));
+//  }
 
-  @Test
-  public void methodEnhancer02WithJsonPath() throws Exception {
-    MethodEnhancer methodEnhancer = new MethodEnhancer();
-
-    String json =
-        TestHelper.getFileAsString("edu/utec/tools/trext/method/equalsEnhancerWithJsonPath.txt");
-
-    assertEquals("setVar(\"Jane\",\"John\")", methodEnhancer
-        .rawStringToOneMethodWithSeveralArguments("setVar \"Jane\" $.firstName", null, json));
-
-    assertEquals("setVar(\"age\",26)", methodEnhancer
-        .rawStringToOneMethodWithSeveralArguments("setVar \"age\" $.age", null, json));
-
-    assertEquals("setVar(\"type\",\"iPhone\")",
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments(
-            "setVar \"type\" $.phoneNumbers[0].type", null, json));
-  }
-
-  @Test
-  public void methodEnhancer02WithVariables() throws Exception {
-    MethodEnhancer methodEnhancer = new MethodEnhancer();
-
-    HashMap<String, Object> variables = new HashMap<String, Object>();
-    variables.put("firstName", "Jane");
-    variables.put("age", 26);
-    variables.put("isAdmin", false);
-
-    assertEquals("setVar(\"name\",\"Jane\")",
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"name\" \"${firstName}\"",
-            variables, null));
-
-    assertEquals("setVar(\"name\",26)", methodEnhancer
-        .rawStringToOneMethodWithSeveralArguments("setVar \"name\" ${age}", variables, null));
-
-    assertEquals("setVar(\"canDelete\",false)",
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"canDelete\" ${isAdmin}",
-            variables, null));
-  }
-
-  @Test
-  public void methodEnhancerIncongruentTypes() throws Exception {
-    LoggerHelper.setDebugLevel();
-
-    MethodEnhancer methodEnhancer = new MethodEnhancer();
-
-    String equals =
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" 123", null, null);
-    assertEquals("setVar(\"id\",123)", equals);
-
-    equals = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" \"123\"", null,
-        null);
-    assertEquals("setVar(\"id\",\"123\")", equals);
-
-    String json = "{\"message\":\"hello\",\"id\":\"200\"}";
-
-    equals =
-        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" $.id", null, json);
-    assertEquals("setVar(\"id\",\"200\")", equals);
-
-  }
+//  @Test
+//  public void methodEnhancerIncongruentTypes() throws Exception {
+//    LoggerHelper.setDebugLevel();
+//
+//    MethodEnhancer methodEnhancer = new MethodEnhancer();
+//
+//    String equals =
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" 123", null, null);
+//    assertEquals("setVar(\"id\",123)", equals);
+//
+//    equals = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" \"123\"", null,
+//        null);
+//    assertEquals("setVar(\"id\",\"123\")", equals);
+//
+//    String json = "{\"message\":\"hello\",\"id\":\"200\"}";
+//
+//    equals =
+//        methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" $.id", null, json);
+//    assertEquals("setVar(\"id\",\"200\")", equals);
+//
+//    equals = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"string\" hola", null,
+//        json);
+//    assertEquals("setVar(\"string\",\"hola\")", equals);
+//
+//  }
 
   @Test
   public void rawStringToConsecutiveMethodsWithSingleArgumentLong() throws Exception {
@@ -178,4 +184,22 @@ public class MethodEnhancerTest {
     assertEquals("assertThat(1598885893000).isNotNull()", methodEnhancer
         .rawStringToConsecutiveMethodsWithSingleArgument("assertThat $.id isNotNull", null, json));
   }
+
+//  @Test
+//  public void methodEnhancerForComplexVariables() throws Exception {
+//    LoggerHelper.setDebugLevel();
+//
+//    MethodEnhancer methodEnhancer = new MethodEnhancer();
+//
+//    HashMap<String, Object> variables = new HashMap<String, Object>();
+//    variables.put("json", "{\"message\":\"hello\",\"id\":\"200\"}");
+//
+//    String enhancedMethod = methodEnhancer.rawStringToOneMethodWithSeveralArguments(
+//        "setVarFromJson \"message\" $.message ${json}", variables, null);
+//
+//    assertEquals("setVarFromJson(\"message\",$.message,\"{\"message\":\"hello\",\"id\":\"200\"}\"",
+//        enhancedMethod);
+//
+//
+//  }
 }

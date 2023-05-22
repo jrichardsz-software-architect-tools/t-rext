@@ -1,0 +1,7 @@
+context
+setVar "userId" $.personId ${req:body}
+setVar "firstName" $.personName ${req:body}
+setVar "isSmart" $.isGenius ${req:body}
+setVar "isBadPlayer" $.isBadGamer ${req:body}
+setVar "label" $.nickname ${req:body}
+

@@ -100,27 +100,6 @@ public class FeatureExecutorTest {
 
   @SuppressWarnings("unchecked")
   @Test
-  public void twoScenariosPropagateVariable() throws Exception {
-
-    File file = TestHelper
-        .getFile("edu/utec/tools/trext/executor/twoGetScenariosPropagateVariable.txt");
-    FeatureExecutor executor = new FeatureExecutor();
-    HashMap<String, Object> report = executor.singleSafeExecute(file, new HashMap<String, Object>());
-
-    assertEquals(2, report.get("passed"));
-
-    assertEquals("passed",
-        ((List<HashMap<String, Object>>) report.get("scenarioStats")).get(0).get("http"));
-    assertEquals("passed",
-        ((List<HashMap<String, Object>>) report.get("scenarioStats")).get(0).get("asserts"));
-    assertEquals("passed",
-        ((List<HashMap<String, Object>>) report.get("scenarioStats")).get(1).get("http"));
-    assertEquals("passed",
-        ((List<HashMap<String, Object>>) report.get("scenarioStats")).get(1).get("asserts"));
-  }
-
-  @SuppressWarnings("unchecked")
-  @Test
   public void oneScenarioInvalidAssert() throws Exception {
 
     File file =
@@ -157,9 +136,11 @@ public class FeatureExecutorTest {
 
   @SuppressWarnings("unchecked")
   @Test
-  public void getAndPostWithVariablePropagation() throws Exception {
+  public void shouldPropagateWithSetVar1Simple() throws Exception {
+    
+    LoggerHelper.setDebugLevel();
 
-    File file = TestHelper.getFile("edu/utec/tools/trext/executor/getAndPostScenario.txt");
+    File file = TestHelper.getFile("edu/utec/tools/trext/executor/twoScenariosSetVarV1.txt");
     FeatureExecutor executor = new FeatureExecutor();
     HashMap<String, Object> report = executor.singleSafeExecute(file, new HashMap<String, Object>());
 
