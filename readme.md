@@ -24,6 +24,8 @@ curl -o- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t
 wget -qO- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t-rext/master/src/main/resources/t-rext.sh | bash
 ```
 
+> Note: Change **master** to pick some specific branch
+
 > Note: For windows users read [this](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki/Installer#for-windows-developerstesters)
 
 ## Steps
@@ -104,9 +106,14 @@ More demos [here](https://github.com/jrichardsz-software-architect-tools/t-rext-
 
 # Special variables
 
-- ${srand} = random string
-- ${irand} = random integer
-- ${drand} = random double
+|key|description|
+|:--|:--|
+|${rand:uuid}| random string|
+|${rand:int}| random integer|
+|${rand:double}| random double|
+|${rand:firstName}| random firstName|
+|${rand:lastName}| random lastName|
+|${rand:letters}| random letters|
 
 # Advanced settings
 
@@ -120,6 +127,11 @@ More details in [wiki](https://github.com/jrichardsz-software-architect-tools/t-
 - composed variables like ${book_id}-latest in asserts y context
 - Add more asserts from: [assertj](https://joel-costigliola.github.io/assertj/core-8/api/org/assertj/core/api/AbstractComparableAssert.html)
 - improve the linux script (installer) like nvm
+- more dynamic vars like https://learning.postman.com/docs/writing-scripts/script-references/variables-list/ and https://github.com/DiUS/java-faker
+- body form url encoded to json
+- add log to file
+- converter from postman to t-rext
+- visual code formatter and color
 
 # Acknowledgments
 

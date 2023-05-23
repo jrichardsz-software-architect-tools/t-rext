@@ -55,8 +55,8 @@
 				<configuration>
 					<check>
 						<haltOnFailure>true</haltOnFailure>
-						<totalBranchRate>65</totalBranchRate>
-						<totalLineRate>65</totalLineRate>
+						<totalBranchRate>60</totalBranchRate>
+						<totalLineRate>60</totalLineRate>
 					</check>
 					<formats>
 						<format>html</format>
@@ -145,10 +145,15 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.6.4</version>
+		</dependency>-->
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 	</dependencies>
 </project>

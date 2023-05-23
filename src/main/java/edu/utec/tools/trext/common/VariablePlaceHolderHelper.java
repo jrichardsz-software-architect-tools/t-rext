@@ -2,9 +2,11 @@ package edu.utec.tools.trext.common;
 
 import java.util.Random;
 import java.util.UUID;
+import org.apache.commons.lang3.RandomStringUtils;
+import com.github.javafaker.Faker;
 
 public class VariablePlaceHolderHelper {
-  
+
   public static String getStringRepresentation(Object value) throws Exception {
     if (value instanceof String) {
       return (String) value;
@@ -18,17 +20,28 @@ public class VariablePlaceHolderHelper {
   }
 
   public static boolean containsJockers(String key) {
-    return key.contentEquals("srand") || key.contentEquals("irand") || key.contentEquals("drand");
+    return key.contentEquals("rand:uuid") || key.contentEquals("rand:int")
+        || key.contentEquals("rand:double") || key.contentEquals("rand:firstName")
+        || key.contentEquals("rand:lastName")|| key.contentEquals("rand:letters");
   }
 
   public static String parseJocker(String key) throws Exception {
+
+    Faker faker = new Faker();
+
     try {
-      if (key.contentEquals("srand")) {
+      if (key.contentEquals("rand:uuid")) {
         return UUID.randomUUID().toString();
-      } else if (key.contentEquals("irand")) {
+      } else if (key.contentEquals("rand:int")) {
         return "" + Math.abs(getRandomIntegerInRange(1000, 10000));
-      } else if (key.contentEquals("drand")) {
+      } else if (key.contentEquals("rand:double")) {
         return "" + Math.abs(getRandomDoubleInRange(1000, 10000));
+      } else if (key.contentEquals("rand:firstName")) {
+        return faker.name().firstName();
+      } else if (key.contentEquals("rand:lastName")) {
+        return faker.name().lastName();
+      } else if (key.contentEquals("rand:letters")) {
+        return RandomStringUtils.randomAlphabetic(5);
       } else {
         throw new Exception(String.format("placeholder is not supported: ${%s}", key));
       }

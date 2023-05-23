@@ -85,9 +85,9 @@ public class FileHelperTest {
     File file = TestHelper.getFile(this, "loadVariablesFromProperties.txt");
     HashMap<String, Object> variables = FileHelper.loadVariablesFromProperties(file);
     assertEquals("http://localhost:8080/v1/book", variables.get("apiBaseUrl"));
-    assertEquals("Flores para ALgernon ${srand}", variables.get("bookTitle"));
-    assertEquals("Daniel Keyes ${srand}", variables.get("bookAuthor"));
-    assertEquals("ISBN-${irand}", variables.get("bookIsbn"));
+    assertEquals("Flores para ALgernon ${rand:uuid}", variables.get("bookTitle"));
+    assertEquals("Daniel Keyes ${rand:uuid}", variables.get("bookAuthor"));
+    assertEquals("ISBN-${rand:int}", variables.get("bookIsbn"));
 
     HashMap<String, Object> emptyVariables =
         FileHelper.loadVariablesFromProperties(new File("imateapot"));

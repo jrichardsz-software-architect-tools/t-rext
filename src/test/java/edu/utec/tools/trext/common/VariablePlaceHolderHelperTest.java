@@ -31,18 +31,18 @@ public class VariablePlaceHolderHelperTest {
 
   @Test
   public void containsJockers() throws Exception {
-    assertThat(VariablePlaceHolderHelper.containsJockers("srand")).isTrue();
-    assertThat(VariablePlaceHolderHelper.containsJockers("irand")).isTrue();
-    assertThat(VariablePlaceHolderHelper.containsJockers("drand")).isTrue();
+    assertThat(VariablePlaceHolderHelper.containsJockers("rand:uuid")).isTrue();
+    assertThat(VariablePlaceHolderHelper.containsJockers("rand:int")).isTrue();
+    assertThat(VariablePlaceHolderHelper.containsJockers("rand:double")).isTrue();
     assertThat(VariablePlaceHolderHelper.containsJockers("tazmania")).isFalse();
   }
 
   @Test
   public void parseJocker() throws Exception {
-    assertThat(VariablePlaceHolderHelper.parseJocker("srand").length()).isGreaterThan(16);
-    assertThat(Integer.valueOf(VariablePlaceHolderHelper.parseJocker("irand")) instanceof Integer)
+    assertThat(VariablePlaceHolderHelper.parseJocker("rand:uuid").length()).isGreaterThan(16);
+    assertThat(Integer.valueOf(VariablePlaceHolderHelper.parseJocker("rand:int")) instanceof Integer)
         .isTrue();
-    assertThat(Double.valueOf(VariablePlaceHolderHelper.parseJocker("drand")) instanceof Double)
+    assertThat(Double.valueOf(VariablePlaceHolderHelper.parseJocker("rand:double")) instanceof Double)
         .isTrue();
   }
 
