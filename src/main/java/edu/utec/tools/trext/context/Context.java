@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.jayway.jsonpath.JsonPath;
+import edu.utec.tools.trext.common.DataTypeHelper;
 import edu.utec.tools.trext.common.StringHelper;
 import edu.utec.tools.trext.variables.VariablePlaceHolderEvaluator;
 
@@ -74,7 +75,14 @@ public class Context {
           logger.debug("converted value: "+value);
           Object spaceRestoredValue = (value instanceof String)?((String)value).replaceAll(spaceEnhancer, " "):value;
           logger.debug("converted value space fixed: "+spaceRestoredValue);
-          globalVariables.put(spaceRestoredKey, spaceRestoredValue);
+          if(DataTypeHelper.isQuotedString(rawValue)) {
+            String stringValue = StringHelper.convertValueToString(spaceRestoredValue);
+            logger.debug("value come from double quoted, so it should be a string");
+            globalVariables.put(spaceRestoredKey, stringValue);
+          }else {
+            globalVariables.put(spaceRestoredKey, spaceRestoredValue);
+          }
+          
         } else if (rawContextPartials.length == 4) {
 
           String rawKey = rawContextPartials[1].trim();

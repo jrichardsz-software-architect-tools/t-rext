@@ -235,7 +235,6 @@ public class VariablePlaceHolderEvaluator {
     } else if (DataTypeHelper.isBoolean(value)) {
       return "" + DataTypeHelper.getBoolean(value);
     } else if (DataTypeHelper.isString(value)) {
-
       return String.format("\"%s\"", value);
     } else {
       throw new Exception(

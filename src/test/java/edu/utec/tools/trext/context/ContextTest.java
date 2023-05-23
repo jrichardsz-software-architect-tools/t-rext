@@ -88,7 +88,7 @@ public class ContextTest {
     assertEquals("The Richard", globalVariables.get("nickname"));
 
   }
-  
+
   @Test
   public void setVarV2ShouldGetValueFromJson() throws Exception {
 
@@ -113,53 +113,27 @@ public class ContextTest {
     assertEquals(false, globalVariables.get("isBadPlayer"));
     assertEquals("The Richard", globalVariables.get("label"));
 
-  }  
+  }
 
 
-  //// @Test
-  //// public void methodEnhancerForComplexVariables() throws Exception {
-  //// LoggerHelper.setDebugLevel();
-  ////
-  //// MethodEnhancer methodEnhancer = new MethodEnhancer();
-  ////
-  //// HashMap<String, Object> variables = new HashMap<String, Object>();
-  //// variables.put("json", "{\"message\":\"hello\",\"id\":\"200\"}");
-  ////
-  //// String enhancedMethod = methodEnhancer.rawStringToOneMethodWithSeveralArguments(
-  //// "setVarFromJson \"message\" $.message ${json}", variables, null);
-  ////
-  //// assertEquals("setVarFromJson(\"message\",$.message,\"{\"message\":\"hello\",\"id\":\"200\"}\"",
-  //// enhancedMethod);
-  ////
-  ////
-  //// }
+  @Test
+  public void setVarV1IncongruentTypes() throws Exception {
+    LoggerHelper.setDebugLevel();
+    
+    String setVarRawLines = TestHelper.getTestFileAsString(this, "set_var_v1_incongruent.txt");
+    List<String> contextLines = TestHelper.convertMultiLineStringToList(setVarRawLines);
+    HashMap<String, Object> globalVariables = new HashMap<String, Object>();
+    HashMap<String, Object> requestVariables = new HashMap<String, Object>();
+    HashMap<String, Object> responseVariables = new HashMap<String, Object>();
+    String json = "{\"message\":\"hello\",\"id\":\"200\"}";
+    responseVariables.put("res:body", json);
 
-  // TODO:
-  // @Test
-  // public void methodEnhancerIncongruentTypes() throws Exception {
-  // LoggerHelper.setDebugLevel();
-  //
-  // MethodEnhancer methodEnhancer = new MethodEnhancer();
-  //
-  // String equals =
-  // methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" 123", null, null);
-  // assertEquals("setVar(\"id\",123)", equals);
-  //
-  // equals = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" \"123\"", null,
-  // null);
-  // assertEquals("setVar(\"id\",\"123\")", equals);
-  //
-  // String json = "{\"message\":\"hello\",\"id\":\"200\"}";
-  //
-  // equals =
-  // methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"id\" $.id", null, json);
-  // assertEquals("setVar(\"id\",\"200\")", equals);
-  //
-  // equals = methodEnhancer.rawStringToOneMethodWithSeveralArguments("setVar \"string\" hola",
-  // null,
-  // json);
-  // assertEquals("setVar(\"string\",\"hola\")", equals);
-  //
-  // }
-  //
+    Context context = new Context();
+    context.evaluate(contextLines, globalVariables, requestVariables, responseVariables);
+    assertEquals("100", globalVariables.get("personId"));
+    assertEquals("99.9", globalVariables.get("proximityToGod"));
+    assertEquals("true", globalVariables.get("isSmart"));
+
+  }
+
 }
