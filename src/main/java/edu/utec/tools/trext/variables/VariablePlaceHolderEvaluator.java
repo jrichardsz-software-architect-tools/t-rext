@@ -13,6 +13,8 @@ import edu.utec.tools.trext.common.VariablePlaceHolderHelper;
 public class VariablePlaceHolderEvaluator {
 
   private final Logger logger = LogManager.getLogger(VariablePlaceHolderEvaluator.class);
+  
+  private final String variableSyntaxRegex = "(\\$\\{[\\w:\\^\\$\\s]+\\})";
 
   public String replaceVariablesAndJockersInString(String rawString, HashMap<String, ?> variables)
       throws Exception {
@@ -21,8 +23,8 @@ public class VariablePlaceHolderEvaluator {
       throw new Exception("rawString is required to evaluate regex. Current value:" + rawString);
     }
 
-    String regex = "(\\$\\{[\\w\\^\\$\\s]+\\})";
-    Matcher m = Pattern.compile(regex).matcher(rawString);
+    
+    Matcher m = Pattern.compile(variableSyntaxRegex).matcher(rawString);
     while (m.find()) {
 
       String key = m.group(0).replace("${", "").replace("}", "");
@@ -79,8 +81,8 @@ public class VariablePlaceHolderEvaluator {
    * Lookup values in the operative system environment.
    */
   public String evaluteValueIfIsEnvironmentVariable(String rawKey) throws Exception {
-    String regex = "(\\$\\{[\\w\\^\\$\\s]+\\})";
-    Matcher m = Pattern.compile(regex).matcher(rawKey);
+
+    Matcher m = Pattern.compile(variableSyntaxRegex).matcher(rawKey);
     while (m.find()) {
       String key = m.group(0).replace("${", "").replace("}", "");
       logger.debug(String.format("variable was detected: %s in raw key: %s", key, rawKey));
