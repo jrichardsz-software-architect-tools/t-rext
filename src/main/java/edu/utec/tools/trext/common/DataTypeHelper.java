@@ -30,10 +30,12 @@ public class DataTypeHelper {
       return false;
     }
 
-    logger.debug(raw + " is an string. Inferring its int value with regex");
+    logger.debug(raw + " is an string. Detecting if it is a int value with regex");
     Pattern pattern = Pattern.compile("^-?\\d{1,10}$");
     Matcher matcher = pattern.matcher((String) raw);
-    return matcher.find();
+    boolean result = matcher.find();
+    logger.debug(result?"is an int":"not an int");
+    return result;
   }
 
   public static int getInt(Object raw) throws Exception {
@@ -74,10 +76,12 @@ public class DataTypeHelper {
       return false;
     }
 
-    logger.debug(raw + " is an string. Inferring its double value with regex");
+    logger.debug(raw + " is an string. Detecting if it is a double value with regex");
     Pattern pattern = Pattern.compile("\\d+\\.\\d+");
     Matcher matcher = pattern.matcher((String) raw);
-    return matcher.find();
+    boolean result = matcher.find();
+    logger.debug(result?"is a double":"not a double");
+    return result;
   }
 
   public static double getDouble(Object raw) throws Exception {
@@ -118,8 +122,10 @@ public class DataTypeHelper {
       return false;
     }
 
-    logger.debug(raw + " is an string. Inferring its boolean value with regex");
-    return ((String) raw).matches("(true|false)");
+    logger.debug(raw + " is an string. Detecting if it is a boolean value with regex");
+    boolean result = ((String) raw).matches("(true|false)");
+    logger.debug(result?"is an boolean":"not a boolean");
+    return result;
   }
 
   public static boolean getBoolean(Object raw) throws Exception {
@@ -160,10 +166,12 @@ public class DataTypeHelper {
       return false;
     }
     
-    logger.debug(raw + " is an string. Inferring its long value with regex");
+    logger.debug(raw + " is an string. Detecting if it is a long value with regex");
     Pattern pattern = Pattern.compile("^-?\\d{1,19}$");
     Matcher matcher = pattern.matcher((String) raw);
-    return matcher.find();    
+    boolean result = matcher.find();
+    logger.debug(result?"is a long":"not a long");
+    return result;    
   }
   
   public static long getLong(Object raw) throws Exception {
@@ -192,7 +200,7 @@ public class DataTypeHelper {
     if (isNull(raw)) {
       return false;
     }
-
+    //"\"([^\"]*)\""
     Pattern pattern = Pattern.compile("\"[^\"]*\"");
     Matcher matcher = pattern.matcher(raw);
     return matcher.find();
@@ -202,7 +210,9 @@ public class DataTypeHelper {
     if (isNull(raw)) {
       return false;
     }
-    return raw instanceof String;
+    boolean result = raw instanceof String;
+    logger.debug(result?raw+" is a string":raw+"is not a string");
+    return result;
   }
 
 }

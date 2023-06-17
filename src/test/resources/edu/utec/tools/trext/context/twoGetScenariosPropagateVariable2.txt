@@ -5,7 +5,7 @@ Scenario: Fetch user
 url http://localhost:8080/user
 method get
 asserts
-assertThat ${status} isEqualTo 200
+assertThat ${res:status} isEqualTo 200
 assertThat $.personId isNotNull
 assertThat $.personId isEqualTo 77777
 context
@@ -15,6 +15,6 @@ Scenario: Fetch netflix preferences
 url http://localhost:8080/v2/netflix/preferences?id=${personId}
 method get
 asserts
-assertThat ${status} isEqualTo 200
+assertThat ${res:status} isEqualTo 200
 assertThat $.series isEqualTo "The100"
 assertThat $.movies isEqualTo "TimeMachine"

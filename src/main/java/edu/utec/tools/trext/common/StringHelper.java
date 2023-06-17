@@ -12,7 +12,7 @@ public class StringHelper {
   private static final Logger logger = LogManager.getLogger(StringHelper.class);
 
   public static Object evaluateJsonExpression(String expresion, String json) throws Exception {
-    logger.debug("jsonapth expression:" + expresion);
+    logger.debug("jsonpath expression: " + expresion);
 
     if (json == null || json.isEmpty()) {
       throw new Exception("Http body is null."
@@ -110,6 +110,29 @@ public class StringHelper {
       return "" + DataTypeHelper.getBoolean(value);
     } else if (DataTypeHelper.isLong(value)) {
       return "" + DataTypeHelper.getLong(value);
+    } else {
+      throw new Exception(
+          String.format("value %s or its class %s is not supported", value, value.getClass()));
+    }
+  }
+  
+  //TODO: validate the required syntax before extraction
+  public static String getKeyFromVariableSyntax(String rawString) {
+    return rawString.replaceFirst("\\$\\{", "").replace("}", "");
+  }
+  
+  public static String convertValueToString(Object value) throws Exception {
+    logger.debug(String.format("transform %s to string", value));
+    if (DataTypeHelper.isInteger(value)) {
+      return "" + DataTypeHelper.getInt(value);
+    } else if (DataTypeHelper.isLong(value)) {
+      return "" + DataTypeHelper.getLong(value);
+    } else if (DataTypeHelper.isDouble(value)) {
+      return "" + DataTypeHelper.getDouble(value);
+    } else if (DataTypeHelper.isBoolean(value)) {
+      return "" + DataTypeHelper.getBoolean(value);
+    } else if (DataTypeHelper.isString(value)) {
+      return (String)value;
     } else {
       throw new Exception(
           String.format("value %s or its class %s is not supported", value, value.getClass()));

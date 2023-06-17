@@ -85,15 +85,15 @@ public class SmartHttpClient {
       logger.debug("Response body : " + response.toString());
 
       HashMap<String, Object> smartHttpClientResponse = new HashMap<String, Object>();
-      smartHttpClientResponse.put("status", responseCode);
-      smartHttpClientResponse.put("body", response.toString());
+      smartHttpClientResponse.put("res:status", responseCode);
+      smartHttpClientResponse.put("res:body", response.toString());
 
       // get response headers
       Map<String, List<String>> map = con.getHeaderFields();
       for (Map.Entry<String, List<String>> entry : map.entrySet()) {
         logger.debug(
             "Key : " + entry.getKey() + " ; Value : " + mergeHeadersWithSameKey(entry.getValue()));
-        smartHttpClientResponse.put((entry.getKey() != null ? entry.getKey() : "default"),
+        smartHttpClientResponse.put("res:h:"+(entry.getKey() != null ? entry.getKey() : "default"),
             mergeHeadersWithSameKey(entry.getValue()));
       }
 

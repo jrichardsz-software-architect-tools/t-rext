@@ -1,0 +1,9 @@
+context
+setVar "_personId" ${personId}
+setVar "_personName" ${personName}
+setVar "_isGenius" ${isGenius}
+setVar "_isBadGamer" ${isBadGamer}
+setVar "_proximityToGod" ${proximityToGod}
+setVar "_dateOnMillis" ${dateOnMillis}
+setVar "_nickname" ${nickname}
+

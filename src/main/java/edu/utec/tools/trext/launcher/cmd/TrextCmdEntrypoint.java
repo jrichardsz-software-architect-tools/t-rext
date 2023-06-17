@@ -58,7 +58,7 @@ public class TrextCmdEntrypoint {
           cmd.getOptionValue("report_directory_location"), cmd.getOptionValue("exclude_file_names"),
           cmd.hasOption("debug"));
     } else if (cmd.getOptionValue("mode").contentEquals("auto")) {
-      // IA mode will try to detect which mode is: single or multiple
+      // I will try to detect which mode is: single or multiple
       AutomaticModeHelper automaticModeHelper = new AutomaticModeHelper();
       HashMap<String, String> arguments =
           automaticModeHelper.analize(cmd.getOptionValue("directory"), cmd.getOptionValue("exclude_file_names"));
@@ -77,11 +77,14 @@ public class TrextCmdEntrypoint {
       }
 
     }
-
-    logger.info("By JRichardsz");
+    
     if (!status) {
-      System.err.println("Features ended with error. Check logs and reports.");
+      logger.error("\u001B[31m" + "Status: ERROR. Check the log and html report."+"\u001B[0m");
+      logger.info("By JRichardsz");
       System.exit(1);
+    }else{
+      logger.info("\u001B[32m" + "Status: SUCCESS. All the scenarios were completed without errors."+"\u001B[0m");
+      logger.info("By JRichardsz");
     }
 
   }

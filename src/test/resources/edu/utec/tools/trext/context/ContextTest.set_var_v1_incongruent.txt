@@ -1,0 +1,4 @@
+context
+setVar "personId" "100"
+setVar "proximityToGod" "99.9"
+setVar "isSmart" "true"

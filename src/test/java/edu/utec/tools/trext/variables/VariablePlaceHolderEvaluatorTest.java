@@ -46,17 +46,17 @@ public class VariablePlaceHolderEvaluatorTest {
 
     Pattern p = Pattern.compile("([a-f0-9]{8}(-[a-f0-9]{4}){4}[a-f0-9]{8})");
     String value =
-        evaluator.replaceVariablesAndJockersInString("http://acme.com/${srand}", variables);
+        evaluator.replaceVariablesAndJockersInString("http://acme.com/${rand:uuid}", variables);
     Matcher m = p.matcher(value);
     assertTrue("value must contain a string uuid. Current:" + value, m.find());
 
     p = Pattern.compile("/\\d+");
-    value = evaluator.replaceVariablesAndJockersInString("http://acme.com/${irand}", variables);
+    value = evaluator.replaceVariablesAndJockersInString("http://acme.com/${rand:int}", variables);
     m = p.matcher(value);
     assertTrue("value must contain a random intenger.Curent:" + value, m.find());
 
     p = Pattern.compile("/\\d+.\\d+");
-    value = evaluator.replaceVariablesAndJockersInString("http://acme.com/${drand}", variables);
+    value = evaluator.replaceVariablesAndJockersInString("http://acme.com/${rand:double}", variables);
     m = p.matcher(value);
     assertTrue("value must contain a random double.Curent:" + value, m.find());
   }
@@ -92,5 +92,20 @@ public class VariablePlaceHolderEvaluatorTest {
     TestHelper.setEnvironmentVariable("SUM", "C");
     VariablePlaceHolderEvaluator evaluator = new VariablePlaceHolderEvaluator();
     assertEquals("A+B=C", evaluator.evaluteValueIfIsEnvironmentVariable("${ADDEND_1}+${ADDEND_2}=${SUM}"));    
+  }
+  
+  @Test
+  public void replaceComposedVariablesInString() throws Exception {
+    
+    LoggerHelper.setDebugLevel();
+
+    VariablePlaceHolderEvaluator evaluator = new VariablePlaceHolderEvaluator();
+
+    HashMap<String, Object> variables = new HashMap<String, Object>();
+    variables.put("req:code", "201545457");
+
+    assertEquals("http://acme.com/201545457",
+        evaluator.replaceVariablesAndJockersInString("http://acme.com/${req:code}", variables));
+
   }
 }

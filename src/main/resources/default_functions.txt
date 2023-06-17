@@ -1,7 +1,3 @@
 def by(){ 
   print "Made by JRichardsz"
 }
-
-def setVar(key, value){ 
-  globalVariables.put(key, value);
-}

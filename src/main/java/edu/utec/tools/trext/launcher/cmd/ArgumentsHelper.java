@@ -53,21 +53,44 @@ public class ArgumentsHelper {
     Option o7 = new Option("debug", "debug", false, "run application with a lot of log");
     o7.setRequired(false);
     options.addOption(o7);
-    
+
     Option o8 = new Option("d", "directory", true, "directory to be scanned");
     o8.setRequired(false);
     options.addOption(o8);
 
-    Option o9 = new Option("ex", "exclude_file_names", true, "java regex to exclude file(name) from feature files");
+    Option o9 = new Option("ex", "exclude_file_names", true,
+        "java regex to exclude file(name) from feature files");
     o9.setRequired(false);
     options.addOption(o9);
+
+    Options helpOptions = new Options();
+
+    Option o10 = new Option("v", "version", false, "the version");
+    o10.setRequired(false);
+    helpOptions.addOption(o10);
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter();
     CommandLine cmd;
 
     try {
-      cmd = parser.parse(options, args);
+      cmd = parser.parse(helpOptions, args, true);
+
+      // have they specified a help option?
+      if (cmd.getOptions().length == 0) {
+        // No! Try normal options.
+        cmd = parser.parse(options, args);
+      } else {
+        // They specified a help option.
+        if(cmd.hasOption("version")) {
+          System.out.println("T-Rext");
+          System.out.println("Version: 1.0.4");
+          System.out.println("Date: 2023-06-17");
+          System.out.println("Author: JRichardsz - https://jrichardsz.github.io");
+        }
+        System.exit(0);
+      }
+
       return cmd;
     } catch (ParseException e) {
       System.out.println(e.getMessage());

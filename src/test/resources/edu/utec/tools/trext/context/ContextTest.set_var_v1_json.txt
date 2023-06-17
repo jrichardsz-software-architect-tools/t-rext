@@ -1,0 +1,7 @@
+{
+"personId": 100,
+"personName": "Richard",
+"isGenius": true,
+"isBadGamer": false,
+"nickname": "The Richard"
+}

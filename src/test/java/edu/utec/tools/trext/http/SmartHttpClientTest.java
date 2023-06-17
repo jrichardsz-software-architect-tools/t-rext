@@ -50,7 +50,7 @@ public class SmartHttpClientTest {
     HashMap<String, Object> response =
         httpClient.performRequest("get", "http://localhost:8080/resource", null, null);
 
-    DocumentContext parsedResponse = JsonPath.parse((String) response.get("body"));
+    DocumentContext parsedResponse = JsonPath.parse((String) response.get("res:body"));
     assertEquals("get", (String) parsedResponse.read("$.sourceMethod"));
     assertEquals("Jane", (String) parsedResponse.read("$.firstName"));
     assertEquals("Doe", (String) parsedResponse.read("$.lastName"));
@@ -65,7 +65,7 @@ public class SmartHttpClientTest {
     HashMap<String, Object> response =
         httpClient.performRequest("post", "http://localhost:8080/resource", null, null);
 
-    DocumentContext parsedResponse = JsonPath.parse((String) response.get("body"));
+    DocumentContext parsedResponse = JsonPath.parse((String) response.get("res:body"));
     assertEquals("post", (String) parsedResponse.read("$.sourceMethod"));
     assertEquals("created", (String) parsedResponse.read("$.status"));
 
@@ -78,7 +78,7 @@ public class SmartHttpClientTest {
     HashMap<String, Object> response =
         httpClient.performRequest("put", "http://localhost:8080/resource", null, null);
 
-    DocumentContext parsedResponse = JsonPath.parse((String) response.get("body"));
+    DocumentContext parsedResponse = JsonPath.parse((String) response.get("res:body"));
     assertEquals("put", (String) parsedResponse.read("$.sourceMethod"));
     assertEquals("updated", (String) parsedResponse.read("$.status"));
 
@@ -91,7 +91,7 @@ public class SmartHttpClientTest {
     HashMap<String, Object> response =
         httpClient.performRequest("delete", "http://localhost:8080/resource", null, null);
 
-    DocumentContext parsedResponse = JsonPath.parse((String) response.get("body"));
+    DocumentContext parsedResponse = JsonPath.parse((String) response.get("res:body"));
     assertEquals("delete", (String) parsedResponse.read("$.sourceMethod"));
     assertEquals("deleted", (String) parsedResponse.read("$.status"));
 

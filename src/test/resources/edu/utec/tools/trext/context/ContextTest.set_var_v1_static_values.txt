@@ -1,0 +1,9 @@
+context
+setVar "personId" 100
+setVar "personName" "Richard"
+setVar "isGenius" true
+setVar "isBadGamer" false
+setVar "proximityToGod" 99.9
+setVar "dateOnMillis" 123456789012345
+setVar "nickname" "The Richard"
+setVar "foo bar" "baz"

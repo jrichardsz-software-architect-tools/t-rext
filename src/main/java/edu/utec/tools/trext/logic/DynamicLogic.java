@@ -20,9 +20,9 @@ public class DynamicLogic {
   public void perform(ArrayList<String> rawAsserts, HashMap<String, Object> globalVariables, HashMap<String, Object> requestVariables,
       HashMap<String, Object> responseVariables) throws Exception {
 
-    String body = (String) responseVariables.get("body");
+    String body = (String) responseVariables.get("res:body");
     
-    //merge all varaibles to make them available in script
+    //merge all variables to make them available in script
     HashMap<String, Object> variables = new HashMap<String, Object>();
     if(globalVariables!=null) {
       variables.putAll(globalVariables);  
@@ -48,6 +48,7 @@ public class DynamicLogic {
     }
 
     for (int a = 1; a < rawAsserts.size(); a++) {
+
       String rawAssert = rawAsserts.get(a);
       String assertAsScript = methodEnhancer
           .rawStringToConsecutiveMethodsWithSingleArgument(rawAssert, variables, body);
@@ -62,7 +63,7 @@ public class DynamicLogic {
 
   private void executeOneLogic(String header, String logic, Binding binding) throws Exception {
     try {
-      logger.debug("enhanced raw assert:" + logic);
+      logger.debug("enhanced raw assert: " + logic);
       GroovyShell shell = new GroovyShell(binding);
       shell.evaluate(header+"\n\n"+logic);
     } catch (ComparisonFailure e) {

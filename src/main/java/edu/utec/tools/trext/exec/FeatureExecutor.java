@@ -72,7 +72,7 @@ public class FeatureExecutor {
         continue;
       }
 
-      logger.info(String.format("scenario [%s] is starting", scenario.getName()));
+      logger.info(String.format(">>> scenario [%s] is starting", scenario.getName()));
       logger.debug(scenario.toString());
       Boolean hasHttpError = null;
       Boolean hasAssertError = null;
@@ -103,10 +103,10 @@ public class FeatureExecutor {
       long start = new Date().getTime();
       long end = 0l;
       try {
-        localHttpRequestVariables.put("method", scenario.getMethod());
-        localHttpRequestVariables.put("url", url);
-        localHttpRequestVariables.put("body", body);
-        localHttpRequestVariables.put("headers", headers);
+        localHttpRequestVariables.put("req:method", scenario.getMethod());
+        localHttpRequestVariables.put("req:url", url);
+        localHttpRequestVariables.put("req:body", body);
+        variablePlaceHolderEvaluator.appendMapAsSingleVariablesWithPrefix(headers, localHttpResponseVariables, "req:h:");
         response = httpClient.performRequest(scenario.getMethod(), url, body, headers);
         end = new Date().getTime();
         localHttpResponseVariables.putAll(response);
@@ -147,7 +147,8 @@ public class FeatureExecutor {
       if (!hasHttpError.booleanValue() && !hasAssertError.booleanValue()) {
         try {
           Context context = new Context();
-          context.evaluate(scenario.getRawContext(), localHttpResponseVariables, globalVariables);
+          context.evaluate(scenario.getRawContext(), globalVariables, localHttpRequestVariables, 
+              localHttpResponseVariables);
           hasContextError = Boolean.FALSE;
           logger.debug("hasContextError:" + hasContextError);
         } catch (Exception e) {
@@ -192,7 +193,7 @@ public class FeatureExecutor {
       scenarioStats.put("durationMillis", end - start);
       scenariosStats.add(scenarioStats);
 
-      // if there is no error, lets continue with the next excenario
+      // if there is no error, lets continue with the next scenario
       if (hasHttpError.booleanValue() || hasAssertError.booleanValue()
           || hasContextError.booleanValue()) {
         logger.info(
