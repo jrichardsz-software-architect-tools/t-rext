@@ -66,7 +66,7 @@ public class ArgumentsHelper {
     Options helpOptions = new Options();
 
     Option o10 = new Option("v", "version", false, "the version");
-    o10.setRequired(true);
+    o10.setRequired(false);
     helpOptions.addOption(o10);
 
     CommandLineParser parser = new DefaultParser();
@@ -83,7 +83,10 @@ public class ArgumentsHelper {
       } else {
         // They specified a help option.
         if(cmd.hasOption("version")) {
-          System.out.println("2023-05 - 1.0.4");            
+          System.out.println("T-Rext");
+          System.out.println("Version: 1.0.4");
+          System.out.println("Date: 2023-06-17");
+          System.out.println("Author: JRichardsz - https://jrichardsz.github.io");
         }
         System.exit(0);
       }

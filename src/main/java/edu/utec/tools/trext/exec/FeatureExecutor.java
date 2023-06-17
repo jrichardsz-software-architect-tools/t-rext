@@ -72,7 +72,7 @@ public class FeatureExecutor {
         continue;
       }
 
-      logger.info(String.format(":::::::::::::::: scenario [%s] is starting", scenario.getName()));
+      logger.info(String.format(">>> scenario [%s] is starting", scenario.getName()));
       logger.debug(scenario.toString());
       Boolean hasHttpError = null;
       Boolean hasAssertError = null;

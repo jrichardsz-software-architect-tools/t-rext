@@ -77,11 +77,14 @@ public class TrextCmdEntrypoint {
       }
 
     }
-
-    logger.info("By JRichardsz");
+    
     if (!status) {
-      System.err.println("Features ended with error. Check logs and reports.");
+      logger.error("\u001B[31m" + "Status: ERROR. Check the log and html report."+"\u001B[0m");
+      logger.info("By JRichardsz");
       System.exit(1);
+    }else{
+      logger.info("\u001B[32m" + "Status: SUCCESS. All the scenarios were completed without errors."+"\u001B[0m");
+      logger.info("By JRichardsz");
     }
 
   }

@@ -17,18 +17,22 @@ T-Rext is a java framework which allows you to automate rest APIs with a rich se
 To install or update, you should run the install script. To do that, you may either download and run the script manually, or use the following cURL or Wget command:
 
 ```
-curl -o- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t-rext/master/src/main/resources/t-rext.sh | bash
+curl -o- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t-rext/master/src/main/resources/t-rext.sh | mode=bin bash
 ```
 
 ```
-wget -qO- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t-rext/master/src/main/resources/t-rext.sh | bash
+wget -qO- https://raw.githubusercontent.com/jrichardsz-software-architect-tools/t-rext/master/src/main/resources/t-rext.sh | mode=bin bash
 ```
 
-> Note: Change **master** to pick some specific branch
+> Note: Change **master** to pick some specific branch or tag
 
 > Note: For windows users read [this](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki/Installer#for-windows-developerstesters)
 
-## Steps
+In order to validate the installation execute this `t-rext -v`. The result should be
+
+![image](https://github.com/jrichardsz-software-architect-tools/t-rext/assets/3322836/e0c32e81-5293-471b-8b3b-e48687594efa)
+
+## Hello World - Steps
 
 - Create some folder like: `/tmp/hello_world`
 - Create a feature inside the recently created folder like: `name_validator.feature`
@@ -54,7 +58,7 @@ t-rext -mode auto -directory /tmp/hello_world
 Or [this](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki/Execute#for-windows-developers) for windows users
 
 
-- That's all! You must see an html report in the main folder:
+- That's all! You should see an html report in the main folder:
 
 ![https://i.ibb.co/4RGbgjx/success-report.png](https://i.ibb.co/4RGbgjx/success-report.png)
 
@@ -121,6 +125,8 @@ More details in [wiki](https://github.com/jrichardsz-software-architect-tools/t-
 
 # TO DO
 
+- windows installer
+- upgrade to java 11
 - Apply cobertura maven plugin
 - Set coverage minimum threshold of 90
 - Add code coverage badges 
