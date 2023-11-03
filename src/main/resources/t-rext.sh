@@ -16,9 +16,9 @@ function mode_bin {
     echo -e "\n\nThis mode will create a simlink of the downloaded $TREXT_HOME/t-rext.jar to  /usr/bin/t-rext"
     echo -e "As any other tool, you need to grant access to perform this operation\n"
 
-    sudo rm /usr/bin/t-rext
+    rm /usr/bin/t-rext 2> /dev/null
 
-    sudo ln -s $TREXT_HOME/t-rext /usr/bin/t-rext
+    ln -s $TREXT_HOME/t-rext /usr/bin/t-rext
     chmod +x /usr/bin/t-rext
 
     echo -e "t-rext is ready!!!"

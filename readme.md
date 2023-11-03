@@ -108,7 +108,7 @@ More demos [here](https://github.com/jrichardsz-software-architect-tools/t-rext-
 | isLessThanOrEqualTo | this <= value |  assertThat $.age isLessThanOrEqualTo 10 |
 | .length() | return the element quantity of collection/array |  assertThat $.books.length() isGreaterThan 5 |
 
-# Special variables
+## Special variables
 
 |key|description|
 |:--|:--|
@@ -119,14 +119,126 @@ More demos [here](https://github.com/jrichardsz-software-architect-tools/t-rext-
 |${rand:lastName}| random lastName|
 |${rand:letters}| random letters|
 
-# Advanced settings
+## Http Variables
 
-More details in [wiki](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki)
+In the context of each scenario execution these variables are available
 
-# TO DO
+**Request**
+
+| key   | sample value         |
+|------------|--------------------------------------------------|
+| req:body   | {"id_number":100}                             |
+| req:method | get                                              |
+| req:url    | http://acme/user/query |
+
+
+**Response**
+
+- Headers are prefixed with **:h**
+- res:body is the response body
+- res:status	is the http status  of response (200,404,500, etc)
+
+| key   | sample value         |
+|-------------------------|----------------------------------------------------|
+| res:h:Server            | Apache xyz                                            |
+| res:h:x-acme-request-id | _36a66ad4-91f8-4b3c-a0de-cd98d4f15b64              |
+| res:h:default           | HTTP/1.1 500 Internal Server Error                 |
+| res:body                | {"code":666,"message":"Failed to fetch users."} |
+| res:h:Date              | Fri, 03 Nov 2023 22:27:29 GMT                      |
+| res:h:Content-Type      | application/json                                   |
+| res:h:Transfer-Encoding | chunked                                            |
+| res:status              | 500                                                |
+
+You could access these variables with this syntax `{variable_name}`
+
+```
+assertThat ${req:method} isEqualTo get
+assertThat ${res:status} isEqualTo 200
+```
+
+**Note**
+
+The `res:body` variable is special. You could access directly with `$.` without `{}`.
+
+If the json response is
+
+```
+{ 
+  "code" : "QUERY_SUCCESS"
+   "content" : {
+     "author" : "jrichardsz",
+     "title" : "I'm Robot"
+   }
+}
+```
+
+You could access the values with 
+
+```
+asserts
+assertThat $.content.author startsWith ${bookAuthor}
+assertThat $.content.title startsWith ${bookTitle}  
+```
+
+## Global Variables
+
+After each success scenario execution you save variables to be used in the next scenarios.
+
+For example we save the initial book quantity of this response
+
+```
+{
+    "books": [{...},{...},{...}]
+}
+```
+
+with this
+
+```
+context
+setVar "initialQuantityBook" $.books.length()
+```
+
+And the variable could be used in the next scenarios with:
+
+```
+asserts
+assertThat $.content.length() isGreaterThan ${initialQuantityBook}
+```
+
+
+Or save the access_token returned in the first scenario 
+```
+{
+    "content": {
+        "access_token": "****"
+    }
+}
+```
+
+with this
+
+```
+context
+setVar "access_token" $.content.access_token
+```
+
+And then use it in the next scenarios with 
+
+```
+headers
+header Content-type = application/json
+header Authorization = Bearer ${access_token}
+```
+
+## Advanced settings
+
+More details in [wiki](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki/Complex-features)
+
+## TO DO
 
 - windows installer
-- upgrade to java 11
+- upgrade to java 21
 - Apply cobertura maven plugin
 - Set coverage minimum threshold of 90
 - Add code coverage badges 
