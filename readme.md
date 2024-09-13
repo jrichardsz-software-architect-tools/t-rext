@@ -2,12 +2,15 @@
 
 ![https://i.ibb.co/QDCfKkm/trext-150.png](https://i.ibb.co/QDCfKkm/trext-150.png)
 
-T-Rext is a java framework which allows you to automate rest APIs with a rich set of fluent assertions. Its natural assertions and truly helpful error messages improves test code readability and is designed to be super easy for even non-programmers.
+T-Rext is a framework which allows you to automate rest APIs with a rich set of fluent assertions. Its natural assertions and truly helpful error messages improves test code readability and is designed to be super easy for even non-programmers.
 
+The goal is to automate tests without coding everything from the scratch. To know a programming language is NOT required. 
+
+Just a plain editor (notepad, notepad++, sublime, vscode, nano, neovim, etc) and some available http endpoint
 
 ## Requirements
 
-- Java >= 8
+- Java >= 8 (Just to run the application, not to write the tests)
 - A healthy rest endpoint like `https://api.agify.io/?name=Richard`
 - A scenario like: 
     - **Richard** age must be greater than **0**      
@@ -122,6 +125,10 @@ More demos [here](https://github.com/jrichardsz-software-architect-tools/t-rext-
 # Advanced settings
 
 More details in [wiki](https://github.com/jrichardsz-software-architect-tools/t-rext/wiki)
+
+# Advanced asserts
+
+https://github.com/jrichardsz-software-architect-tools/t-rext/wiki/Complex-features
 
 # TO DO
 
